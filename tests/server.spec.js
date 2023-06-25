@@ -26,4 +26,10 @@ describe("Operaciones CRUD de cafes", () => {
     console.log(response.statusCode);
     expect(response.statusCode).toBe(201);
   });
+  it("Probando la ruta PUT/cafes devuelve status 400 si no coincide el id del req.params con el id enviado en el body", async () => {
+    const editCafe = { id: 3, nombre: "Lungo" };
+    const {body, statusCode} = await request(server).put(`/cafes/2`).send(editCafe);
+    console.log('El mensaje recibido es ',body.message);
+    expect(statusCode).toBe(400);
+  });
 });
